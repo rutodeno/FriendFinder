@@ -16,14 +16,42 @@
     <div class="container">
         <div class="row">
             <div class="panel panel-primary">
-                <div class = "panel-heading">
-
-                    <h3 class="panel-title"><strong>Survey Questions</strong></h3>
-                
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        <strong>Your details</strong>
+                    </h3>
                 </div>
-                <div class= "panel-body">
-                    <div class="col-md-12">
-                        <div class= "question1">
+
+                <div class="panel-body">
+                    <div class="col-md-6">
+                        <form>
+                            <div class="form-group">
+                                <label for="name">Name</label>
+                                <input type="name" class="form-control" id="name" placeholder="Enter your name">
+                            </div>
+                            <div class="form-group">
+                                <label form="image">Image</label>
+                                <input type="link" class="form-control" id="image" placeholder="Attach a link to your photo">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+
+                    <h3 class="panel-title">
+                        <strong>Survey Questions</strong>
+                    </h3>
+
+                </div>
+                <div class="panel-body">
+                    <div class="col-md-6">
+                        <div class="question1">
                             <p>1. Do you sometimes find youself thinking of solving world prolems ?.</p>
                             <select class="form-control">
                                 <option>Strongly Agree</option>
@@ -34,7 +62,7 @@
                             </select>
                         </div>
                         <br>
-                        <div class= "question2">
+                        <div class="question2">
                             <p>2. You like going out on trips, skiing.</p>
                             <select class="form-control">
                                 <option>Strongly Agree</option>
@@ -45,7 +73,7 @@
                             </select>
                         </div>
                         <br>
-                        <div class= "question3">
+                        <div class="question3">
                             <p>4. Do you easily make new friends?</p>
                             <select class="form-control">
                                 <option>Strongly Agree</option>
@@ -56,7 +84,7 @@
                             </select>
                         </div>
                         <br>
-                        <div class= "question3">
+                        <div class="question3">
                             <p>5. Would you describe yourself as being nerdy ?</p>
                             <select class="form-control">
                                 <option>Strongly Agree</option>
@@ -72,7 +100,7 @@
         </div>
 
         <footer class="footer">
-            <nav class="navbar navbar-default navbar-fixed-bottom">
+            <nav class="navbar navbar-default ">
                 <div class="container">
                     <p>
                         <a href="/api/friends">API Friends Link</a> |
