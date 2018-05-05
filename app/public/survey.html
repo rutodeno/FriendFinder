@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,18 +9,56 @@
 
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-    crossorigin="anonymous">
+        crossorigin="anonymous">
 </head>
+
 <body>
-    <div class = "container">
-        
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="jumbotron">
+                    <h1 class="text-center">Friend Finder</h1>
+                    <hr>
+                    <br>
+                    <div class="text-center">
+                        <a href="/">
+                            <button class="btn btn-lg btn-primary">Home</button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <label class="radio-inline ">
+                    <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">1
+                </label>
+                <label class="radio-inline ">
+                    <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">2
+                </label>
+                <label class="radio-inline ">
+                    <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">3
+                </label>
+                <label class="radio-inline ">
+                    <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">4
+                </label>
+                <label class="radio-inline ">
+                    <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">5
+                </label>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <nav class="navbar navbar-default navbar-fixed-bottom">
+                <div class="container">
+                    <p>
+                        <a href="/api/friends">API Friends Link</a> |
+                        <a href="https://github.com/rutodeno/FriendFinder">GitHub Repo</a>
+                    </p>
+                </div>
+            </nav>
+        </footer>
     </div>
 
-
-    <footer class = "footer">
-        <div class= "container">
-            <p><a href ="/api/friends">API Friends Link</a> | <a href = "https://github.com/rutodeno/FriendFinder">GitHub Repo</a></p>
-        </div>
-    </footer>
 </body>
+
 </html>

@@ -1,14 +1,19 @@
 var path = require("path");
 
-module.exports = function(app) {
-    app.get("/", function(req, res){
+module.exports = function (app) {
+
+    app.get("/", function (req, res) {
         res.sendFile(path.join(__dirname, "../public/home.html"));
     });
 
-    app.get("/survey", function(req,res){
+    app.get("/survey", function (req, res) {
         res.sendFile(path.join(__dirname, "../public/survey.html"));
-    });
-};
 
+        var fileLocation = path.join(__dirname, "../public/survey.html");
+        console.log("HTML File is here: " + fileLocation)
+
+    });
+
+};
 
 
