@@ -133,8 +133,7 @@
         </nav>
     </footer>
 
-    <script type="text/javascript">
-
+    <script type"text/javascript">
         function getFriend() { /// getting data
             var currentURL = window.location.origin;
             $.ajax({ url: currentURL + "/api/friends", method: "GET" })
@@ -143,29 +142,11 @@
                     console.log("URL: " + currentURL + "/api/friends");
                     console.log("-----------------------------------------");
 
-                    console.log(userData);
+                    //console.log(userData);
+
+                    matchFriend(userData);
                 })
         }
-
-
-        $("#submitBtn").on("click", function (event) {
-
-            event.preventDefault();
-            var friendData = {
-                name: $("#name").val().trim(),
-                photo: $("#image").val().trim(),
-
-                scores: [   $("#num1").val().trim(),
-                            $("#num2").val().trim(),
-                            $("#num3").val().trim(),
-                            $("#num4").val().trim(),
-                            $("#num5").val().trim()
-                ]
-            }
-
-            postFriend(friendData)
-            getFriend();
-        });
 
         function postFriend(friends) {
             $.post("/api/friends", friends, function (data) {
@@ -176,7 +157,7 @@
                     console.log("Friend data has NOT been added");
                 }
 
-                $("#name").val("");
+                $("#name").val(""); // clear form
                 $("#image").val("");
                 $("#num1").val("");
                 $("#num2").val("");
@@ -198,6 +179,53 @@
         })
 
 
+        $("#submitBtn").on("click", function (event) {
+
+            event.preventDefault();
+            var friendData = {
+                name: $("#name").val().trim(),
+                photo: $("#image").val().trim(),
+
+                scores: [   $("#num1").val().trim(),
+                            $("#num2").val().trim(),
+                            $("#num3").val().trim(),
+                            $("#num4").val().trim(),
+                            $("#num5").val().trim()
+                        ]
+            }
+
+            postFriend(friendData) // posing data to api
+            getFriend(); // getting data from api
+        });
+
+        function matchFriend(friendData){
+
+            var bigScoresArray = [];
+            var scoreTracker = [];
+
+            for (var j = 0; j < friendData.length; j++){
+    
+                var intConvert = friendData[j].scores;
+                var scoreArry = [];
+                for( var i = 0 ; i < intConvert.length ; i++ ){
+
+                     var x =  parseInt(intConvert[i]);
+                    
+                     scoreArry.push(x);
+                 }
+
+                bigScoresArray.push(scoreArry);
+
+                scoreTracker.push(bigScoresArray[j].reduce(getSum));
+
+            }
+
+           console.log(scoreTracker[0]);
+                
+            function getSum(total, sum){
+                return total +sum;
+            }
+        }
     </script>
 
 </body>

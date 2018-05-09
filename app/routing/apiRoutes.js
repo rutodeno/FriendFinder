@@ -10,8 +10,8 @@ module.exports = function(app){
         friendData.push(req.body);
         res.json(req.body);
 
-        console.log(friendData);
-        console.log(req.body);
+        //console.log(friendData);
+        //console.log(req.body);
     });
 
     app.post("/api/clear", function(){
