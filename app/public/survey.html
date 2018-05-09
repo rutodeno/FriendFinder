@@ -198,21 +198,21 @@
             getFriend(); // getting data from api
         });
 
-        function matchFriend(friendData){
+        function matchFriend(friendData) {
 
             var bigScoresArray = [];
             var scoreTracker = [];
 
-            for (var j = 0; j < friendData.length; j++){
-    
+            for (var j = 0; j < friendData.length; j++) {
+
                 var intConvert = friendData[j].scores;
                 var scoreArry = [];
-                for( var i = 0 ; i < intConvert.length ; i++ ){
+                for (var i = 0; i < intConvert.length; i++) {
 
-                     var x =  parseInt(intConvert[i]);
-                    
-                     scoreArry.push(x);
-                 }
+                    var x = parseInt(intConvert[i]);
+
+                    scoreArry.push(x);
+                }
 
                 bigScoresArray.push(scoreArry);
 
@@ -220,10 +220,25 @@
 
             }
 
-           console.log(scoreTracker[0]);
+            var differenceArray = [];
+
+            for ( var i  = 0 ;  i < (scoreTracker.length -1) ; i++){
                 
-            function getSum(total, sum){
-                return total +sum;
+                var diff = Math.abs(scoreTracker[scoreTracker.length-1] - scoreTracker[i]);
+                
+                differenceArray.push(diff);
+
+            }
+            
+            // person with the loweset difference is most likely one with common interest.
+            var lowestNum = Math.min(...differenceArray);
+
+            var bffIndex = differenceArray.indexOf(lowestNum); // gets index of the number
+
+            console.log(friendData[bffIndex]);
+
+            function getSum(total, sum) {
+                return total + sum;
             }
         }
     </script>
