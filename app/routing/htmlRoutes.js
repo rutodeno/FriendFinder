@@ -10,7 +10,6 @@ module.exports = function (app) {
         res.sendFile(path.join(__dirname, "../public/survey.html"));
 
         var fileLocation = path.join(__dirname, "../public/survey.html");
-        console.log("HTML File is here: " + fileLocation)
 
     });
 

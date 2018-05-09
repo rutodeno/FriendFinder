@@ -10,6 +10,8 @@
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
         crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery.js"></script>
 </head>
 
 <body>
@@ -53,7 +55,7 @@
                         <div class="col-md-6">
                             <div class="question1">
                                 <p>1. Do you sometimes find youself thinking of solving world prolems ?.</p>
-                                <select class="form-control">
+                                <select class="form-control" id="num1">
                                     <option>Strongly Agree</option>
                                     <option>Agree</option>
                                     <option>Neutral</option>
@@ -62,9 +64,9 @@
                                 </select>
                             </div>
                             <br>
-                            <div class="question2">
+                            <div class="question2" >
                                 <p>2. You like going out on trips, skiing.</p>
-                                <select class="form-control">
+                                <select class="form-control" id="num2">
                                     <option>Strongly Agree</option>
                                     <option>Agree</option>
                                     <option>Neutral</option>
@@ -73,9 +75,9 @@
                                 </select>
                             </div>
                             <br>
-                            <div class="question3">
-                                <p>4. Do you easily make new friends?</p>
-                                <select class="form-control">
+                            <div class="question3" >
+                                <p>3. Do you easily make new friends?</p>
+                                <select class="form-control" id="num3">
                                     <option>Strongly Agree</option>
                                     <option>Agree</option>
                                     <option>Neutral</option>
@@ -84,10 +86,20 @@
                                 </select>
                             </div>
                             <br>
-                            <div class="question3">
+                            <div class="question4" >
+                                <p>4. Would you describe yourself as being nerdy ?</p>
+                                <select class="form-control" id="num4">
+                                    <option value=>Strongly Agree</option>
+                                    <option>Agree</option>
+                                    <option>Neutral</option>
+                                    <option>Disagree</option>
+                                    <option>Strongly Disagree</option>
+                                </select>
+                            </div>
+                            <div class="question4" >
                                 <p>5. Would you describe yourself as being nerdy ?</p>
-                                <select class="form-control">
-                                    <option>Strongly Agree</option>
+                                <select class="form-control" id="num4">
+                                    <option value=>Strongly Agree</option>
                                     <option>Agree</option>
                                     <option>Neutral</option>
                                     <option>Disagree</option>
@@ -101,7 +113,7 @@
 
             <div class="row">
                 <div class="col-md-6">
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-primary" id ="submitBtn">Submit</button>
                 </div>
             </div>
 
@@ -114,11 +126,71 @@
             <div class="container">
                 <p>
                     <a href="/api/friends">API Friends Link</a> |
-                    <a href="https://github.com/rutodeno/FriendFinder">GitHub Repo</a>
+                    <a href="https://github.com/rutodeno/FriendFinder">GitHub Repo</a> |
+                    <a href= "#" id="clear">Clear Friends List</a>
                 </p>
             </div>
         </nav>
     </footer>
+    
+    <script type="text/javascript">
+
+        function getFriend() { /// getting data
+            var currentURL = window.location.origin;
+            $.ajax({ url: currentURL + "/api/friends", method: "GET" })
+                .then(function (userData) {
+                    console.log("--------------------------------------");
+                    console.log("URL: " + currentURL + "/api/friends");
+                    console.log("-----------------------------------------");
+
+                    console.log(userData);
+
+
+                })
+        }
+
+
+        $("#submitBtn").on("click", function(event){
+
+            event.preventDefault();  
+            var friendData = {
+                name : $("#name").val().trim(),
+                image : $("#image").val().trim(),
+                scores: [   $("#num1").val().trim(),
+                            $("#num2").val().trim(),
+                            $("#num3").val().trim(),
+                            $("#num4").val().trim()
+                        ]
+            }
+            
+            postFriend(friendData)
+            getFriend();
+        });
+
+        function postFriend(friends) {
+            $.post("/api/friends", friends, function(data){
+
+                if(data){
+                    console.log("Friend data has been added");
+                } else {
+                    console.log("Friend data has NOT been added");
+                }
+                
+            })
+        }
+
+        function clearFreindsList() {
+            var currentURL = window.location.origin;
+            $.ajax({ url: currentURL + "/api/clear", method: "POST" })
+        }
+
+        $("#clear").on("click", function () {
+            console.log("Cleared friends list");
+            clearFreindsList();
+        })
+
+
+    </script>
 
 </body>
 
