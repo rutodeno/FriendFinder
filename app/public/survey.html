@@ -56,54 +56,54 @@
                             <div class="question1">
                                 <p>1. Do you sometimes find youself thinking of solving world prolems ?.</p>
                                 <select class="form-control" id="num1">
-                                    <option>Strongly Agree</option>
-                                    <option>Agree</option>
-                                    <option>Neutral</option>
-                                    <option>Disagree</option>
-                                    <option>Strongly Disagree</option>
+                                    <option value="1">Strongly Agree</option>
+                                    <option value="2">Agree</option>
+                                    <option value="3">Neutral</option>
+                                    <option value="4">Disagree</option>
+                                    <option value="5">Strongly Disagree</option>
                                 </select>
                             </div>
                             <br>
-                            <div class="question2" >
+                            <div class="question2">
                                 <p>2. You like going out on trips, skiing.</p>
                                 <select class="form-control" id="num2">
-                                    <option>Strongly Agree</option>
-                                    <option>Agree</option>
-                                    <option>Neutral</option>
-                                    <option>Disagree</option>
-                                    <option>Strongly Disagree</option>
+                                    <option value="1">Strongly Agree</option>
+                                    <option value="2">Agree</option>
+                                    <option value="3">Neutral</option>
+                                    <option value="4">Disagree</option>
+                                    <option value="5">Strongly Disagree</option>
                                 </select>
                             </div>
                             <br>
-                            <div class="question3" >
+                            <div class="question3">
                                 <p>3. Do you easily make new friends?</p>
                                 <select class="form-control" id="num3">
-                                    <option>Strongly Agree</option>
-                                    <option>Agree</option>
-                                    <option>Neutral</option>
-                                    <option>Disagree</option>
-                                    <option>Strongly Disagree</option>
+                                    <option value="1">Strongly Agree</option>
+                                    <option value="2">Agree</option>
+                                    <option value="3">Neutral</option>
+                                    <option value="4">Disagree</option>
+                                    <option value="5">Strongly Disagree</option>
                                 </select>
                             </div>
                             <br>
-                            <div class="question4" >
+                            <div class="question4">
                                 <p>4. Would you describe yourself as being nerdy ?</p>
                                 <select class="form-control" id="num4">
-                                    <option value=>Strongly Agree</option>
-                                    <option>Agree</option>
-                                    <option>Neutral</option>
-                                    <option>Disagree</option>
-                                    <option>Strongly Disagree</option>
+                                    <option value="1">Strongly Agree</option>
+                                    <option value="2">Agree</option>
+                                    <option value="3">Neutral</option>
+                                    <option value="4">Disagree</option>
+                                    <option value="5">Strongly Disagree</option>
                                 </select>
                             </div>
-                            <div class="question4" >
-                                <p>5. Would you describe yourself as being nerdy ?</p>
-                                <select class="form-control" id="num4">
-                                    <option value=>Strongly Agree</option>
-                                    <option>Agree</option>
-                                    <option>Neutral</option>
-                                    <option>Disagree</option>
-                                    <option>Strongly Disagree</option>
+                            <div class="question5">
+                                <p>5. What activity would you most likely do over the weekend ?</p>
+                                <select class="form-control" id="num5">
+                                    <option value="1">Go Skiing</option>
+                                    <option value="2">Spend time with family</option>
+                                    <option value="3">Party</option>
+                                    <option value="4">Read a book</option>
+                                    <option value="5">Go for a run</option>
                                 </select>
                             </div>
                         </div>
@@ -113,7 +113,7 @@
 
             <div class="row">
                 <div class="col-md-6">
-                    <button type="submit" class="btn btn-primary" id ="submitBtn">Submit</button>
+                    <button type="submit" class="btn btn-primary" id="submitBtn">Submit</button>
                 </div>
             </div>
 
@@ -127,12 +127,12 @@
                 <p>
                     <a href="/api/friends">API Friends Link</a> |
                     <a href="https://github.com/rutodeno/FriendFinder">GitHub Repo</a> |
-                    <a href= "#" id="clear">Clear Friends List</a>
+                    <a href="#" id="clear">Clear Friends List</a>
                 </p>
             </div>
         </nav>
     </footer>
-    
+
     <script type="text/javascript">
 
         function getFriend() { /// getting data
@@ -144,38 +144,46 @@
                     console.log("-----------------------------------------");
 
                     console.log(userData);
-
-
                 })
         }
 
 
-        $("#submitBtn").on("click", function(event){
+        $("#submitBtn").on("click", function (event) {
 
-            event.preventDefault();  
+            event.preventDefault();
             var friendData = {
-                name : $("#name").val().trim(),
-                image : $("#image").val().trim(),
+                name: $("#name").val().trim(),
+                photo: $("#image").val().trim(),
+
                 scores: [   $("#num1").val().trim(),
                             $("#num2").val().trim(),
                             $("#num3").val().trim(),
-                            $("#num4").val().trim()
-                        ]
+                            $("#num4").val().trim(),
+                            $("#num5").val().trim()
+                ]
             }
-            
+
             postFriend(friendData)
             getFriend();
         });
 
         function postFriend(friends) {
-            $.post("/api/friends", friends, function(data){
+            $.post("/api/friends", friends, function (data) {
 
-                if(data){
+                if (data) {
                     console.log("Friend data has been added");
                 } else {
                     console.log("Friend data has NOT been added");
                 }
-                
+
+                $("#name").val("");
+                $("#image").val("");
+                $("#num1").val("");
+                $("#num2").val("");
+                $("#num3").val("");
+                $("#num4").val("");
+                $("#num5").val("");
+
             })
         }
 
