@@ -6,7 +6,9 @@ function getFriend() { /// getting data
             console.log("URL: " + currentURL + "/api/friends");
             console.log("-----------------------------------------");
 
-            console.log(userData);
+            //console.log(userData);
+
+            matchFriend(userData);
         })
 }
 
@@ -53,9 +55,72 @@ $("#submitBtn").on("click", function (event) {
                     $("#num3").val().trim(),
                     $("#num4").val().trim(),
                     $("#num5").val().trim()
-        ]
+                ]
     }
 
     postFriend(friendData) // posing data to api
     getFriend(); // getting data from api
+
+    $("#myModal").modal() // creating the modal 
 });
+
+function matchFriend(friendData) {
+
+    var bigScoresArray = [];
+    var scoreTracker = [];
+
+    for (var j = 0; j < friendData.length; j++) {
+
+        var intConvert = friendData[j].scores;
+        var scoreArry = [];
+        for (var i = 0; i < intConvert.length; i++) {
+
+            var x = parseInt(intConvert[i]);
+
+            scoreArry.push(x);
+        }
+
+        bigScoresArray.push(scoreArry);
+
+        scoreTracker.push(bigScoresArray[j].reduce(getSum));
+
+    }
+
+    var differenceArray = [];
+
+    for ( var i  = 0 ;  i < (scoreTracker.length -1) ; i++){
+        
+        var diff = Math.abs(scoreTracker[scoreTracker.length-1] - scoreTracker[i]);
+        
+        differenceArray.push(diff);
+
+    }
+    
+    // person with the loweset difference is most likely one with common interest.
+    var lowestNum = Math.min(...differenceArray);
+
+    var bffIndex = differenceArray.indexOf(lowestNum); // gets index of the number
+    
+    $("#modal-body").html("Your best match is: "+friendData[bffIndex] +"<br/>");
+
+    console.log(friendData[bffIndex]);
+
+    function getSum(total, sum) {
+        return total + sum;
+    }
+}
+
+    function modal() {
+        var html = '<div class="modal-fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">';
+        html += '<div class="modalpdialog" role="document">';
+        html += '<div class="modal-content">';
+        html += '<div class="modal-header">';
+        html += '<h4 class="modal-title" id="myModalLabel">BFF</h4>';
+        html += '</div>';
+        html += '<div class="modal-body" id="modalBody">';
+
+        html += '</div>';
+        html += '</div>';
+        html += '</div>';
+        html += '</div>';
+    }

@@ -11,7 +11,9 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
         crossorigin="anonymous">
 
-    <script src="https://code.jquery.com/jquery.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -118,6 +120,26 @@
             </div>
 
         </form>
+        <!-- Modal -->
+        <div class = "modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content -->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Modal Header</h4>
+                    </div>
+                        <div class="modal-body">
+                        <p>Some text in the modal</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 
     <br>
@@ -133,116 +155,8 @@
         </nav>
     </footer>
 
-    <script type"text/javascript">
-        function getFriend() { /// getting data
-            var currentURL = window.location.origin;
-            $.ajax({ url: currentURL + "/api/friends", method: "GET" })
-                .then(function (userData) {
-                    console.log("--------------------------------------");
-                    console.log("URL: " + currentURL + "/api/friends");
-                    console.log("-----------------------------------------");
-
-                    //console.log(userData);
-
-                    matchFriend(userData);
-                })
-        }
-
-        function postFriend(friends) {
-            $.post("/api/friends", friends, function (data) {
-
-                if (data) {
-                    console.log("Friend data has been added");
-                } else {
-                    console.log("Friend data has NOT been added");
-                }
-
-                $("#name").val(""); // clear form
-                $("#image").val("");
-                $("#num1").val("");
-                $("#num2").val("");
-                $("#num3").val("");
-                $("#num4").val("");
-                $("#num5").val("");
-
-            })
-        }
-
-        function clearFreindsList() {
-            var currentURL = window.location.origin;
-            $.ajax({ url: currentURL + "/api/clear", method: "POST" })
-        }
-
-        $("#clear").on("click", function () {
-            console.log("Cleared friends list");
-            clearFreindsList();
-        })
-
-
-        $("#submitBtn").on("click", function (event) {
-
-            event.preventDefault();
-            var friendData = {
-                name: $("#name").val().trim(),
-                photo: $("#image").val().trim(),
-
-                scores: [   $("#num1").val().trim(),
-                            $("#num2").val().trim(),
-                            $("#num3").val().trim(),
-                            $("#num4").val().trim(),
-                            $("#num5").val().trim()
-                        ]
-            }
-
-            postFriend(friendData) // posing data to api
-            getFriend(); // getting data from api
-        });
-
-        function matchFriend(friendData) {
-
-            var bigScoresArray = [];
-            var scoreTracker = [];
-
-            for (var j = 0; j < friendData.length; j++) {
-
-                var intConvert = friendData[j].scores;
-                var scoreArry = [];
-                for (var i = 0; i < intConvert.length; i++) {
-
-                    var x = parseInt(intConvert[i]);
-
-                    scoreArry.push(x);
-                }
-
-                bigScoresArray.push(scoreArry);
-
-                scoreTracker.push(bigScoresArray[j].reduce(getSum));
-
-            }
-
-            var differenceArray = [];
-
-            for ( var i  = 0 ;  i < (scoreTracker.length -1) ; i++){
-                
-                var diff = Math.abs(scoreTracker[scoreTracker.length-1] - scoreTracker[i]);
-                
-                differenceArray.push(diff);
-
-            }
-            
-            // person with the loweset difference is most likely one with common interest.
-            var lowestNum = Math.min(...differenceArray);
-
-            var bffIndex = differenceArray.indexOf(lowestNum); // gets index of the number
-
-            console.log(friendData[bffIndex]);
-
-            function getSum(total, sum) {
-                return total + sum;
-            }
-        }
-    </script>
-
+    <script src= "js/logic.js"></script>
+    
 </body>
 
 </html>
