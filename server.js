@@ -8,12 +8,11 @@ var PORT = process.env.PORT || 7999 ;
 app.use(bodyParser.urlencoded({ extended: true}));
 app.use(bodyParser.json());
 app.use(express.static('app/public'));
-//app.use(express.static(path.join(__dirname,'app/images')));
+app.use('/static', express.static(path.join('app/images')));
 
 
 require("./app/routing/apiRoutes.js")(app);
 require("./app/routing/htmlRoutes.js")(app);
-
 
 
 app.listen(PORT, function(){
