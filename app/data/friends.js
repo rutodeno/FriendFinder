@@ -2,14 +2,14 @@ var friendsArray = [
 
     {
         name: "Jerry",
-        photo: "../../../images/JerryMouse.png",
+        photo: '../public/images/JerryMouse.png',
         scores: ["1", "1","1", "1","1"]
     },
 
     {
         name: "Tom",
-        photo: "../../../images/tomCat.png",
-        scores: ["10", "10", "10", "10","10"]
+        photo: "../public/images/tomCat.png",
+        scores: ["5", "5", "5", "5","5"]
     }
 ]
 

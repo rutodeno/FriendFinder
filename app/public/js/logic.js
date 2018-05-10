@@ -43,26 +43,31 @@ $("#clear").on("click", function () {
 })
 
 
-$("#submitBtn").on("click", function (event) {
+$(document).ready(function (){
 
-    event.preventDefault();
-    var friendData = {
-        name: $("#name").val().trim(),
-        photo: $("#image").val().trim(),
+    $("#submitBtn").on("click", function (event) {
 
-        scores: [   $("#num1").val().trim(),
-                    $("#num2").val().trim(),
-                    $("#num3").val().trim(),
-                    $("#num4").val().trim(),
-                    $("#num5").val().trim()
-                ]
-    }
+        event.preventDefault();
+        var friendData = {
+            name: $("#name").val().trim(),
+            photo: $("#image").val().trim(),
+    
+            scores: [   $("#num1").val().trim(),
+                        $("#num2").val().trim(),
+                        $("#num3").val().trim(),
+                        $("#num4").val().trim(),
+                        $("#num5").val().trim()
+                    ]
+        }
+    
+        postFriend(friendData) // posing data to api
+        getFriend(); // getting data from api
+    
+        $("#myModal").modal() // creating the modal 
+    });
 
-    postFriend(friendData) // posing data to api
-    getFriend(); // getting data from api
+})
 
-    $("#myModal").modal() // creating the modal 
-});
 
 function matchFriend(friendData) {
 
@@ -100,8 +105,9 @@ function matchFriend(friendData) {
     var lowestNum = Math.min(...differenceArray);
 
     var bffIndex = differenceArray.indexOf(lowestNum); // gets index of the number
-    
-    $("#modal-body").html("Your best match is: "+friendData[bffIndex] +"<br/>");
+
+   $("#friendInfo").html("Your best match is: <h3>"+friendData[bffIndex].name +"</h3><br/>"
+                        +"<image src="+friendData[bffIndex].photo+" width ='200' height ='200'>");
 
     console.log(friendData[bffIndex]);
 
@@ -110,17 +116,3 @@ function matchFriend(friendData) {
     }
 }
 
-    function modal() {
-        var html = '<div class="modal-fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">';
-        html += '<div class="modalpdialog" role="document">';
-        html += '<div class="modal-content">';
-        html += '<div class="modal-header">';
-        html += '<h4 class="modal-title" id="myModalLabel">BFF</h4>';
-        html += '</div>';
-        html += '<div class="modal-body" id="modalBody">';
-
-        html += '</div>';
-        html += '</div>';
-        html += '</div>';
-        html += '</div>';
-    }
